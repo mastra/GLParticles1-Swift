@@ -19,12 +19,14 @@ class EmitterShader {
  // Uniforms
  uniform mat4 uProjectionMatrix;
  uniform float uK;
+ uniform float uTime;
+
  varying vec3 vShade;
 
  void main(void)
 {
-  float x = cos(uK*aTheta)*sin(aTheta);
-  float y = cos(uK*aTheta)*cos(aTheta);
+  float x = uTime * cos(uK*aTheta)*sin(aTheta);
+  float y = uTime * cos(uK*aTheta)*cos(aTheta);
   
   gl_Position = uProjectionMatrix * vec4(x, y, 0.0, 1.0);
   gl_PointSize = 16.0;
@@ -56,6 +58,7 @@ void main(void)
   
   // with other uniform handles
   var uColor: GLint = 0
+  var uTime: GLint = 0
   
   func loadShader() {
     
@@ -74,9 +77,11 @@ void main(void)
     uK = glGetUniformLocation(aProgram, "uK")
     
     // with the other attributes
-    aShade = glGetAttribLocation(aProgram, "aShade");
+    aShade = glGetAttribLocation(aProgram, "aShade")
     
     // with the other uniforms
-    uColor = glGetUniformLocation(aProgram, "uColor");
+    uColor = glGetUniformLocation(aProgram, "uColor")
+    uTime = glGetUniformLocation(aProgram, "uTime")
+    
   }
 }

@@ -10,13 +10,19 @@ import UIKit
 import GLKit
 import OpenGLES
 
-class ViewController: GLKViewController {
+class ViewController: GLKViewController, GLKViewControllerDelegate {
+
+  
   let NUM_PARTICLES = 360
   var emitter = Emitter()
   var emitterShader = EmitterShader()
+  var _timeCurrent : Float = 0.0
+  var _timeMax : Float = 3.0
+  var _timeDirection : Float = 1.0
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.delegate = self
     // Do any additional setup after loading the view, typically from a nib.
     var context = EAGLContext(api: EAGLRenderingAPI.openGLES2)
     EAGLContext.setCurrent(context)
@@ -68,6 +74,7 @@ class ViewController: GLKViewController {
     glUniform1f(self.emitterShader.uK, emitter.k)
     
     glUniform3f(self.emitterShader.uColor, emitter.color[0], emitter.color[1], emitter.color[2])
+    glUniform1f(self.emitterShader.uTime, (_timeCurrent/_timeMax))
     
     // 3
     // Attributes
@@ -104,6 +111,20 @@ class ViewController: GLKViewController {
     return UnsafeRawPointer(bitPattern: i)
   }
 
+  func update() {
+    if _timeCurrent > _timeMax {
+      _timeDirection = -1.0
+    } else {
+      if _timeCurrent < 0.0 {
+        _timeDirection = 1.0
+      }
+    }
+    _timeCurrent += _timeDirection * Float(self.timeSinceLastUpdate)
+  }
+  
+  func glkViewControllerUpdate(_ controller: GLKViewController) {
+    update()
+  }
 
 }
 
