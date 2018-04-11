@@ -73,7 +73,7 @@ class ViewController: GLKViewController {
       1,                                        // One component per particle
       GLenum(GL_FLOAT),                                 // Data is floating point type
       GLboolean(GL_FALSE),                                 // No fixed point scaling
-      GLsizei(MemoryLayout<GLfloat>.size),                         // No gaps in data
+      GLsizei(MemoryLayout<Particle>.size),                         // No gaps in data
       BUFFER_OFFSET(0))      // Start from "theta" offset within bound buffer
     
     // 4
