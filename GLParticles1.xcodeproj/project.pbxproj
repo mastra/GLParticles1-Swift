@@ -12,6 +12,13 @@
 		DCA48249207BBD85007BD071 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCA48247207BBD85007BD071 /* Main.storyboard */; };
 		DCA4824B207BBD86007BD071 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCA4824A207BBD86007BD071 /* Assets.xcassets */; };
 		DCA4824E207BBD86007BD071 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCA4824C207BBD86007BD071 /* LaunchScreen.storyboard */; };
+		DCA48257207BBDC1007BD071 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA48256207BBDB3007BD071 /* QuartzCore.framework */; };
+		DCA4825A207BBDEC007BD071 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA48258207BBDCA007BD071 /* GLKit.framework */; };
+		DCA4825B207BBDEC007BD071 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA48259207BBDCB007BD071 /* OpenGLES.framework */; };
+		DCA4825D207BC102007BD071 /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA4825C207BC102007BD071 /* Particle.swift */; };
+		DCA4825F207BC12C007BD071 /* Emitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA4825E207BC12C007BD071 /* Emitter.swift */; };
+		DCA48263207BD81D007BD071 /* EmiterShader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA48262207BD81D007BD071 /* EmiterShader.swift */; };
+		DCA48265207BD9CF007BD071 /* ShaderProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA48264207BD9CF007BD071 /* ShaderProcessor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +29,15 @@
 		DCA4824A207BBD86007BD071 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DCA4824D207BBD86007BD071 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DCA4824F207BBD86007BD071 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DCA48256207BBDB3007BD071 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		DCA48258207BBDCA007BD071 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		DCA48259207BBDCB007BD071 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		DCA4825C207BC102007BD071 /* Particle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Particle.swift; sourceTree = "<group>"; };
+		DCA4825E207BC12C007BD071 /* Emitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emitter.swift; sourceTree = "<group>"; };
+		DCA48260207BC878007BD071 /* Emitter.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Emitter.vsh; sourceTree = "<group>"; };
+		DCA48261207BD2A7007BD071 /* Emitter.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Emitter.fsh; sourceTree = "<group>"; };
+		DCA48262207BD81D007BD071 /* EmiterShader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmiterShader.swift; sourceTree = "<group>"; };
+		DCA48264207BD9CF007BD071 /* ShaderProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderProcessor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +45,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCA4825A207BBDEC007BD071 /* GLKit.framework in Frameworks */,
+				DCA4825B207BBDEC007BD071 /* OpenGLES.framework in Frameworks */,
+				DCA48257207BBDC1007BD071 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +59,7 @@
 			children = (
 				DCA48242207BBD85007BD071 /* GLParticles1 */,
 				DCA48241207BBD85007BD071 /* Products */,
+				DCA48255207BBDB3007BD071 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,8 +80,24 @@
 				DCA4824A207BBD86007BD071 /* Assets.xcassets */,
 				DCA4824C207BBD86007BD071 /* LaunchScreen.storyboard */,
 				DCA4824F207BBD86007BD071 /* Info.plist */,
+				DCA4825C207BC102007BD071 /* Particle.swift */,
+				DCA4825E207BC12C007BD071 /* Emitter.swift */,
+				DCA48260207BC878007BD071 /* Emitter.vsh */,
+				DCA48261207BD2A7007BD071 /* Emitter.fsh */,
+				DCA48262207BD81D007BD071 /* EmiterShader.swift */,
+				DCA48264207BD9CF007BD071 /* ShaderProcessor.swift */,
 			);
 			path = GLParticles1;
+			sourceTree = "<group>";
+		};
+		DCA48255207BBDB3007BD071 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DCA48258207BBDCA007BD071 /* GLKit.framework */,
+				DCA48259207BBDCB007BD071 /* OpenGLES.framework */,
+				DCA48256207BBDB3007BD071 /* QuartzCore.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +173,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCA48246207BBD85007BD071 /* ViewController.swift in Sources */,
+				DCA4825D207BC102007BD071 /* Particle.swift in Sources */,
+				DCA48263207BD81D007BD071 /* EmiterShader.swift in Sources */,
+				DCA4825F207BC12C007BD071 /* Emitter.swift in Sources */,
 				DCA48244207BBD85007BD071 /* AppDelegate.swift in Sources */,
+				DCA48265207BD9CF007BD071 /* ShaderProcessor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,7 +251,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -262,7 +302,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
