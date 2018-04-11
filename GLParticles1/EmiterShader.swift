@@ -14,11 +14,13 @@ class EmitterShader {
 """
 // Attributes
  attribute float aTheta;
- 
+ attribute vec3 aShade;
+
  // Uniforms
  uniform mat4 uProjectionMatrix;
  uniform float uK;
- 
+ varying vec3 vShade;
+
  void main(void)
 {
   float x = cos(uK*aTheta)*sin(aTheta);
@@ -26,12 +28,21 @@ class EmitterShader {
   
   gl_Position = uProjectionMatrix * vec4(x, y, 0.0, 1.0);
   gl_PointSize = 16.0;
+  vShade = aShade;
 }
 """
   let fsh = """
- void main(void)
+// Input from Vertex Shader
+varying highp vec3 vShade;
+ 
+// Uniforms
+uniform highp vec3 uColor;
+ 
+void main(void)
 {
-  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+    highp vec4 color = vec4((uColor+vShade), 1.0);
+    color.rgb = clamp(color.rgb, vec3(0.0), vec3(1.0));
+    gl_FragColor = color;
 }
 """
   
@@ -39,6 +50,13 @@ class EmitterShader {
   var aTheta : GLint = 0
   var uProjectionMatrix : GLint = 0
   var uK : GLint = 0
+  
+  // with other attribute handles
+  var aShade : GLint = 0
+  
+  // with other uniform handles
+  var uColor: GLint = 0
+  
   func loadShader() {
     
     // Program
@@ -54,5 +72,11 @@ class EmitterShader {
     
     uProjectionMatrix = glGetUniformLocation(aProgram, "uProjectionMatrix")
     uK = glGetUniformLocation(aProgram, "uK")
+    
+    // with the other attributes
+    aShade = glGetAttribLocation(aProgram, "aShade");
+    
+    // with the other uniforms
+    uColor = glGetUniformLocation(aProgram, "uColor");
   }
 }

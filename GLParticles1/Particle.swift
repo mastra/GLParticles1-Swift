@@ -8,4 +8,8 @@
 import GLKit
 struct Particle {
   public var tetha : GLfloat = 0.0
+  public var shade : [GLfloat] = [0.0, 0.0, 0.0]
+  init(t:GLfloat) {
+    self.tetha = t
+  }
 }

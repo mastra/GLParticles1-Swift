@@ -8,6 +8,7 @@
 
 import UIKit
 import GLKit
+import OpenGLES
 
 class ViewController: GLKViewController {
   let NUM_PARTICLES = 360
@@ -27,6 +28,9 @@ class ViewController: GLKViewController {
     
     emitter.k = 4.0
     emitter.loadParticles()
+    emitter.color[0] = 0.76
+    emitter.color[1] = 0.12
+    emitter.color[2] = 0.34
     
     emitterShader.loadShader()
     
@@ -35,7 +39,7 @@ class ViewController: GLKViewController {
     glBindBuffer(GLenum(GL_ARRAY_BUFFER), particleBuffer)      // Bind particle buffer
     glBufferData(                                       // Fill bound buffer with particles
       GLenum(GL_ARRAY_BUFFER),                       // Buffer target
-      MemoryLayout<GLfloat>.stride * emitter.particles.count,             // Buffer data size
+      MemoryLayout<Particle>.stride * emitter.particles.count,             // Buffer data size
       emitter.particles,                     // Buffer data pointer
       GLenum(GL_STATIC_DRAW))
   }
@@ -63,6 +67,8 @@ class ViewController: GLKViewController {
     
     glUniform1f(self.emitterShader.uK, emitter.k)
     
+    glUniform3f(self.emitterShader.uColor, emitter.color[0], emitter.color[1], emitter.color[2])
+    
     // 3
     // Attributes
     //glEnableVertexAttribArray(GLuint(GLKVertexAttrib.position.rawValue))
@@ -76,15 +82,28 @@ class ViewController: GLKViewController {
       GLsizei(MemoryLayout<Particle>.size),                         // No gaps in data
       BUFFER_OFFSET(0))      // Start from "theta" offset within bound buffer
     
+    glEnableVertexAttribArray(GLuint(self.emitterShader.aShade))
+    glVertexAttribPointer(GLuint(self.emitterShader.aShade),                // Set pointer
+      3,                                        // Three components per particle
+      GLenum(GL_FLOAT),                                 // Data is floating point type
+      GLboolean(GL_FALSE),                                 // No fixed point scaling
+      GLsizei(MemoryLayout<Particle>.size),                         // No gaps in data
+      BUFFER_OFFSET(4))
+    // Start from "shade" offset within bound buffer
+    //glVertexAttribPointer(index: 0, size: 3, type: GL_FLOAT,
+    //                      normalized: false, stride: GLsizei(strideof(GLfloat) * 3), pointer: nil)
+    
     // 4
     // Draw particles
     glDrawArrays(GLenum(GL_POINTS), 0, 360)
     glDisableVertexAttribArray(GLuint(self.emitterShader.aTheta))
+    glDisableVertexAttribArray(GLuint(self.emitterShader.aShade))
   }
   
   func BUFFER_OFFSET(_ i: Int) -> UnsafeRawPointer? {
     return UnsafeRawPointer(bitPattern: i)
   }
+
 
 }
 
